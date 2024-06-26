@@ -1,11 +1,17 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
 
 
-const mongoURL = "mongodb://localhost:27017/hotels";
+ //const mongurl = process.env.MONGODB_URL_LOCAL;
+const mongoURL = process.env.MONGODB_URL;
 
 mongoose.connect(mongoURL, {
     useNewUrlParser:true,
-    useUnifiedTopology:true
+    useUnifiedTopology:true,
+    ssl: true,
+    serverSelectionTimeoutMS: 50000, // Increase timeout to 50 seconds
+    socketTimeoutMS: 45000,  
+   
 })
 
 const db = mongoose.connection;
